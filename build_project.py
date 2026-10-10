@@ -54,7 +54,7 @@ opening('L1',58,133,90,math.pi/2,'window',125,85)
 opening('L1',1067,102,108,math.pi/2,'french',220)
 opening('L1',1067,265,50,math.pi/2,'window',65,140)
 opening('L1',1067,419,65,math.pi/2,'window',125,85)
-opening('L2',428,110,50,math.pi/2)
+opening('L2',428,259,50,math.pi/2)
 opening('L2',869,305,50,0)
 opening('L2',947,418,45,math.pi/2)
 opening('L2',535,305,65,0,'window',110,90)
@@ -165,6 +165,8 @@ for node in root.iter():
 S*=ratio
 lower_area=sum(polygon_area(pts)*S*S for lid,name,pts,color in rooms if lid=='L1')/10000
 assert abs(lower_area-90)<0.001
+from studio_su import furnish
+furnish(root,el,assets,S,xy)
 xml=E.tostring(root,encoding='utf-8',xml_declaration=True)
 (OUT/'Home.xml').write_bytes(xml)
 with zipfile.ZipFile(OUT/'Planimetria_due_livelli.sh3d','w',zipfile.ZIP_DEFLATED) as z:
@@ -191,7 +193,15 @@ for lid,oy,title in [('L1',70,'PRIMO PIANO'),('L2',690,'SECONDO PIANO (MANSARDAT
     for pts in winders: d.polygon([(x+5,y+oy) for x,y in pts],fill='#A26B39',outline='black')
     for i in range(4):d.rectangle((582+5,oy+70+i*12.5,632+5,oy+82.5+i*12.5),fill='#A26B39',outline='black',width=1)
     if lid=='L2':
-        for x,y in [(356,163),(967,154),(875,421)]:d.rectangle((x-28+5,y-28+oy,x+28+5,y+28+oy),outline='#008fcc',width=3)
+        for group in root.findall('furnitureGroup'):
+            if not group.get('name','').startswith('Studio su /') or 'falda in legno' in group.get('name','') or 'climatizzatore' in group.get('name',''):continue
+            for piece in sorted(group.findall('pieceOfFurniture'),key=lambda n:float(n.get('elevation','0'))):
+                cx=float(piece.get('x'))/S+58+5;cy=float(piece.get('y'))/S+oy
+                w=float(piece.get('width'))/S;dep=float(piece.get('depth'))/S
+                a=float(piece.get('angle','0'))
+                points=[(cx+x*math.cos(a)-y*math.sin(a),cy+x*math.sin(a)+y*math.cos(a)) for x,y in [(-w/2,-dep/2),(w/2,-dep/2),(w/2,dep/2),(-w/2,dep/2)]]
+                d.polygon(points,fill='#'+piece.get('color','AAAAAA'),outline='#555555')
+        for x,y in [(255,109),(967,154),(875,421)]:d.rectangle((x-28+5,y-28+oy,x+28+5,y+28+oy),outline='#008fcc',width=3)
 d.text((45,1230),f'Piano inferiore: 90 m² netti circa. Larghezza {1009*S/100:.2f} m. Falde da definire.',fill='#555555',font_size=18)
 im.save(OUT/'Anteprima_planimetria.png')
 print('Creato progetto:',len(walls),'muri;',len(rooms),'stanze;',len(openings),'porte/finestre')
@@ -199,7 +209,7 @@ with zipfile.ZipFile(OUT/'Planimetria_due_livelli.sh3d') as z:
     assert z.testzip() is None
     doc=E.fromstring(z.read('Home.xml'))
     for node in doc.iter():
-        for attr in ('model','icon','planIcon'):
+        for attr in ('model','icon','planIcon','image'):
             if attr in node.attrib: assert node.attrib[attr] in z.namelist()
     for name in z.namelist():
         if name.endswith('.obj'):
