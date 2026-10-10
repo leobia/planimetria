@@ -6,6 +6,9 @@ Aprire `Planimetria_due_livelli.sh3d` in Sweet Home 3D. Questo è il file princi
 
 ## Stato attuale
 
+- Cucina, studio inferiore e bagno inferiore ricostruiti dalle sei foto. Cucina con basi e pensili bianchi, piano scuro, forno, lavastoviglie, lavatrice, frigorifero, lavello, tavolo e mensole. Studio con armadio chiaro, scrivania, sedia da ufficio, libreria bassa, sedie, radiatore e lettiera. Bagno con lavabo su mobile in legno, specchio, doccetta, WC, bidet, pensile, radiatore, pavimento blu e ceramiche crema a rosette blu. Tutte le porte interne dei due livelli hanno il modello in legno; finestre e portafinestra conservate. `complete_lower_floor.py` applica queste modifiche al file corrente. Dimensioni stimate, dettagli semplificati.
+- Ingresso inferiore arredato dalle due foto: mobile in legno con lampada e due sedie verdi sotto scala, specchio, scarpiera alta, appendiabiti, citofono, radiatore e quadri. Collocazione interpretata con cucina a destra della scala e bagno in fondo al corridoio; misure stimate. `ingresso_giu.py` aggiorna questo ambiente e corregge la porta del salotto usando il modello in legno, preservando scala e altri ambienti.
+- Salotto inferiore arredato dalle tre foto: divano bianco con cuscini rossi, mobile TV nero con diffusori e giradischi, libreria in legno accanto alla finestra, tavolo rotondo e sedie, tavolino con piano in vetro, tappeto chiaro, lampada, sgabello, tiragraffi e robot aspirapolvere. Forme e misure degli arredi stimate; geometria della stanza conservata. `salotto.py` aggiorna soltanto questo ambiente nel progetto corrente.
 - Due livelli con muri, ambienti, porte e finestre.
 - Piano inferiore di circa 90 m² interni; dimensioni e altezze stimate.
 - Scala aperta con pedate in legno, curva a ventaglio, struttura e ringhiera nere.
