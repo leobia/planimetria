@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.venv/
+Home.xml
+Anteprima_planimetria.png
+Verifica_scala.png
