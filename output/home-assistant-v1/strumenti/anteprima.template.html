@@ -22,7 +22,7 @@
   main { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; padding: 16px; max-width: 1500px; margin: 0 auto; }
   @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
 
-  .stage { position: relative; width: 100%; margin: 0 auto; border-radius: 12px; overflow: hidden; background: #1e1e1e; }
+  .stage { position: relative; width: 100%; margin: 0 auto; container-type: inline-size; border-radius: 12px; overflow: hidden; background: #1e1e1e; }
   .stage img { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; }
   .stage .night, .stage .light, .stage .cat { transition: opacity .45s ease, filter .45s ease; }
   .stage .night, .stage .light { opacity: 0; transition: opacity .45s ease; }
@@ -38,6 +38,12 @@
     box-shadow: 0 0 18px rgba(242, 183, 102, .7); }
   @media (max-width: 600px) { .hot { width: 28px; height: 28px; } .hot svg { width: 15px; height: 15px; } }
 
+  .wx { position: absolute; transform: translate(0, -50%); color: rgba(244, 240, 233, .96); white-space: nowrap;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .7); pointer-events: none; font-size: 1.5cqw; line-height: 1; }
+  .wx.big { font-size: 3.6cqw; font-weight: 500; }
+  .wx.ico { transform: translate(-50%, -50%); width: 1.6cqw; height: 1.6cqw; opacity: .8; }
+  .wx.cond { transform: translate(-50%, -50%); width: 4.8cqw; height: 4.8cqw; }
+  .wx svg { width: 100%; height: 100%; display: block; }
   aside { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; align-self: start; }
   aside h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin: 14px 0 2px; font-weight: 600; }
   aside h3:first-of-type { margin-top: 0; }
@@ -82,7 +88,7 @@
     </div>
   </aside>
 </main>
-<footer>Stessi file usati da Home Assistant (<code>www/floorplan/</code>). Clic su una stanza o sulla sua icona per accenderla; più stanze possono restare accese insieme. La gattina dorme in camera.</footer>
+<footer>Stessi file usati da Home Assistant (<code>www/floorplan/</code>). Clic su una stanza o sulla sua icona per accenderla; più stanze possono restare accese insieme. La gattina dorme in camera. Il meteo qui mostra valori d'esempio; in Home Assistant usa <code>weather.forecast_casa</code>.</footer>
 <script>
 const DATA = /*__DATA__*/null;
 const BULB = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-4 12.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26A7 7 0 0 0 12 2Zm-3 18a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>';
@@ -111,6 +117,26 @@ function render() {
     left: (c.center_px[0] - c.width_px / 2) / W * 100 + '%',
     top: (c.center_px[1] - c.width_px * 0.375) / H * 100 + '%',
     width: c.width_px / W * 100 + '%', height: 'auto',
+  });
+
+  // widget meteo: stessa disposizione di Home Assistant, valori d'esempio
+  const ICONS = {
+    'mdi:white-balance-sunny': 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-5 2.4 3.4h-4.8L12 2Zm0 20-2.4-3.4h4.8L12 22ZM2 12l3.4-2.4v4.8L2 12Zm20 0-3.4 2.4V9.6L22 12Z',
+    'mdi:weather-night': 'M17.8 15.7A7.5 7.5 0 0 1 8.3 6.2 8 8 0 1 0 17.8 15.7Z',
+    'mdi:water-percent': 'M12 3s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z',
+    'mdi:weather-windy': 'M4 10h10a3 3 0 1 0-3-3h2a1 1 0 1 1 1 1H4v2Zm0 4h13a2.5 2.5 0 1 1-2.5 2.5h2a.5.5 0 1 0 .5-.5H4v-2Z',
+    cond: 'M6.5 19a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 17.5 9a5 5 0 0 1 .5 10H6.5Z',
+  };
+  const SAMPLE = { temperature: '19.6 °C', max: '21.4 °C', min: '12.8 °C', humidity: '72%', wind_speed: '8.3 km/h' };
+  const svgIcon = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="${d}"/></svg>`;
+  DATA.weather.elements.forEach(e => {
+    const d = document.createElement('div');
+    d.className = 'wx ' + ({ condition: 'cond', icon: 'ico', big: 'big', small: '' })[e.kind];
+    d.style.left = e.x / W * 100 + '%'; d.style.top = e.y / H * 100 + '%';
+    if (e.kind === 'condition') d.innerHTML = svgIcon(ICONS.cond);
+    else if (e.kind === 'icon') d.innerHTML = svgIcon(ICONS[e.what] || '');
+    else d.textContent = SAMPLE[e.what];
+    stage.append(d);
   });
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');

@@ -5,16 +5,24 @@
   "opacity": { "giorno": 0.6, "notte": 1.0 },
   "casa": {
     "_nota": "Vista unica: i due piani sulla stessa tela. offsets = posizione (x,y) di ogni illustrazione 1500x1049 sulla tela; order = dal fondo al davanti.",
-    "size": [1500, 1420],
+    "size": [1630, 1440],
     "order": ["primo-piano", "mansarda"],
-    "offsets": { "primo-piano": [0, 434], "mansarda": [0, -66] }
+    "offsets": { "primo-piano": [150, 454], "mansarda": [-10, -66] }
   },
   "gatta": {
-    "_nota": "Gattina tigrata grigia sul letto della camera. center/width in pixel della tela casa; si scurisce di notte se la luce della stanza e' spenta.",
+    "_nota": "Gattina tigrata grigia sul letto della camera. center/width in pixel dell'illustrazione del suo piano; si scurisce di notte se la luce della stanza e' spenta.",
     "file": "casa/gatta.svg",
-    "center": [896, 238],
+    "floor": "mansarda",
+    "center": [896, 304],
     "width": 54,
     "room": "camera"
+  },
+  "meteo": {
+    "_nota": "Widget meteo in alto a sinistra. anchor = angolo in alto a sinistra in pixel della tela casa. Massima/minima da sensori template del pacchetto.",
+    "entity": "weather.forecast_casa",
+    "anchor": [40, 40],
+    "sensor_max": "sensor.planimetria_meteo_massima",
+    "sensor_min": "sensor.planimetria_meteo_minima"
   },
   "floors": [
     {

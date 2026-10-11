@@ -15,7 +15,7 @@ views:
               - entity: input_boolean.planimetria_notte
                 name: Modalità notte
           - type: picture-elements
-            image: /local/floorplan/casa/base-giorno.png?v=2
+            image: /local/floorplan/casa/base-giorno.png?v=3
             elements:
               # ---- giorno
               - type: conditional
@@ -26,9 +26,9 @@ views:
                 elements:
                   - type: image
                     entity: light.salotto
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-salotto.png?v=2
+                      "on": /local/floorplan/casa/luce-salotto.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -39,9 +39,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.ingresso
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-ingresso.png?v=2
+                      "on": /local/floorplan/casa/luce-ingresso.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -52,9 +52,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.cucina
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-cucina.png?v=2
+                      "on": /local/floorplan/casa/luce-cucina.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -65,9 +65,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.bagno_primo_piano
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-bagno-giu.png?v=2
+                      "on": /local/floorplan/casa/luce-bagno-giu.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -78,9 +78,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.studio_primo_piano
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-studio-giu.png?v=2
+                      "on": /local/floorplan/casa/luce-studio-giu.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -91,9 +91,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.studio_mansarda
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-studio-su.png?v=2
+                      "on": /local/floorplan/casa/luce-studio-su.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -104,9 +104,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.pianerottolo
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-pianerottolo.png?v=2
+                      "on": /local/floorplan/casa/luce-pianerottolo.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -117,9 +117,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.camera
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-camera.png?v=2
+                      "on": /local/floorplan/casa/luce-camera.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -130,9 +130,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.bagno_mansarda
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-bagno-su.png?v=2
+                      "on": /local/floorplan/casa/luce-bagno-su.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -143,9 +143,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.ripostiglio
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-ripostiglio.png?v=2
+                      "on": /local/floorplan/casa/luce-ripostiglio.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -156,13 +156,13 @@ views:
                       opacity: 0.6
                   # gattina (camera)
                   - type: image
-                    image: /local/floorplan/casa/gatta.svg?v=2
+                    image: /local/floorplan/casa/gatta.svg?v=3
                     tap_action:
                       action: none
                     style:
-                      top: "16.76%"
-                      left: "59.73%"
-                      width: "3.60%"
+                      top: "16.53%"
+                      left: "54.36%"
+                      width: "3.31%"
                       pointer-events: none
               # ---- notte
               - type: conditional
@@ -172,7 +172,7 @@ views:
                     state: "on"
                 elements:
                   - type: image
-                    image: /local/floorplan/casa/base-notte.png?v=2
+                    image: /local/floorplan/casa/base-notte.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -182,9 +182,9 @@ views:
                       pointer-events: none
                   - type: image
                     entity: light.salotto
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-salotto.png?v=2
+                      "on": /local/floorplan/casa/luce-salotto.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -195,9 +195,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.ingresso
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-ingresso.png?v=2
+                      "on": /local/floorplan/casa/luce-ingresso.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -208,9 +208,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.cucina
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-cucina.png?v=2
+                      "on": /local/floorplan/casa/luce-cucina.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -221,9 +221,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.bagno_primo_piano
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-bagno-giu.png?v=2
+                      "on": /local/floorplan/casa/luce-bagno-giu.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -234,9 +234,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.studio_primo_piano
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-studio-giu.png?v=2
+                      "on": /local/floorplan/casa/luce-studio-giu.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -247,9 +247,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.studio_mansarda
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-studio-su.png?v=2
+                      "on": /local/floorplan/casa/luce-studio-su.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -260,9 +260,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.pianerottolo
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-pianerottolo.png?v=2
+                      "on": /local/floorplan/casa/luce-pianerottolo.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -273,9 +273,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.camera
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-camera.png?v=2
+                      "on": /local/floorplan/casa/luce-camera.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -286,9 +286,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.bagno_mansarda
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-bagno-su.png?v=2
+                      "on": /local/floorplan/casa/luce-bagno-su.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -299,9 +299,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.ripostiglio
-                    image: /local/floorplan/casa/trasparente.png?v=2
+                    image: /local/floorplan/casa/trasparente.png?v=3
                     state_image:
-                      "on": /local/floorplan/casa/luce-ripostiglio.png?v=2
+                      "on": /local/floorplan/casa/luce-ripostiglio.png?v=3
                     tap_action:
                       action: none
                     style:
@@ -312,7 +312,7 @@ views:
                       opacity: 1.0
                   # gattina (camera)
                   - type: image
-                    image: /local/floorplan/casa/gatta.svg?v=2
+                    image: /local/floorplan/casa/gatta.svg?v=3
                     entity: light.camera
                     state_filter:
                       "off": brightness(45%) saturate(70%)
@@ -321,10 +321,132 @@ views:
                     tap_action:
                       action: none
                     style:
-                      top: "16.76%"
-                      left: "59.73%"
-                      width: "3.60%"
+                      top: "16.53%"
+                      left: "54.36%"
+                      width: "3.31%"
                       pointer-events: none
+              # ---- meteo
+              - type: state-icon
+                entity: weather.forecast_casa
+                state_color: false
+                tap_action:
+                  action: more-info
+                style:
+                  top: "6.60%"
+                  left: "5.52%"
+                  --mdc-icon-size: clamp(34px, 4.4vw, 84px)
+                  color: rgba(244, 240, 233, 0.96)
+              - type: state-label
+                entity: weather.forecast_casa
+                attribute: temperature
+                suffix: " °C"
+                tap_action:
+                  action: more-info
+                style:
+                  top: "6.60%"
+                  left: "9.20%"
+                  color: rgba(244, 240, 233, 0.96)
+                  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7)
+                  white-space: nowrap
+                  transform: "translate(0, -50%)"
+                  font-size: clamp(24px, 3.5vw, 66px)
+                  font-weight: 500
+              - type: icon
+                icon: mdi:white-balance-sunny
+                tap_action:
+                  action: none
+                style:
+                  top: "11.67%"
+                  left: "10.06%"
+                  --mdc-icon-size: clamp(13px, 1.45vw, 26px)
+                  color: rgba(244, 240, 233, 0.8)
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.planimetria_meteo_massima
+                tap_action:
+                  action: more-info
+                style:
+                  top: "11.67%"
+                  left: "11.41%"
+                  color: rgba(244, 240, 233, 0.96)
+                  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7)
+                  white-space: nowrap
+                  transform: "translate(0, -50%)"
+                  font-size: clamp(12px, 1.45vw, 26px)
+                  font-weight: 400
+              - type: icon
+                icon: mdi:weather-night
+                tap_action:
+                  action: none
+                style:
+                  top: "11.67%"
+                  left: "19.88%"
+                  --mdc-icon-size: clamp(13px, 1.45vw, 26px)
+                  color: rgba(244, 240, 233, 0.8)
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.planimetria_meteo_minima
+                tap_action:
+                  action: more-info
+                style:
+                  top: "11.67%"
+                  left: "21.23%"
+                  color: rgba(244, 240, 233, 0.96)
+                  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7)
+                  white-space: nowrap
+                  transform: "translate(0, -50%)"
+                  font-size: clamp(12px, 1.45vw, 26px)
+                  font-weight: 400
+              - type: icon
+                icon: mdi:water-percent
+                tap_action:
+                  action: none
+                style:
+                  top: "15.00%"
+                  left: "10.06%"
+                  --mdc-icon-size: clamp(13px, 1.45vw, 26px)
+                  color: rgba(244, 240, 233, 0.8)
+                  pointer-events: none
+              - type: state-label
+                entity: weather.forecast_casa
+                attribute: humidity
+                suffix: "%"
+                tap_action:
+                  action: more-info
+                style:
+                  top: "15.00%"
+                  left: "11.41%"
+                  color: rgba(244, 240, 233, 0.96)
+                  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7)
+                  white-space: nowrap
+                  transform: "translate(0, -50%)"
+                  font-size: clamp(12px, 1.45vw, 26px)
+                  font-weight: 400
+              - type: icon
+                icon: mdi:weather-windy
+                tap_action:
+                  action: none
+                style:
+                  top: "15.00%"
+                  left: "19.88%"
+                  --mdc-icon-size: clamp(13px, 1.45vw, 26px)
+                  color: rgba(244, 240, 233, 0.8)
+                  pointer-events: none
+              - type: state-label
+                entity: weather.forecast_casa
+                attribute: wind_speed
+                suffix: " km/h"
+                tap_action:
+                  action: more-info
+                style:
+                  top: "15.00%"
+                  left: "21.23%"
+                  color: rgba(244, 240, 233, 0.96)
+                  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7)
+                  white-space: nowrap
+                  transform: "translate(0, -50%)"
+                  font-size: clamp(12px, 1.45vw, 26px)
+                  font-weight: 400
               # ---- comandi (sopra a tutto)
               - type: state-icon
                 entity: light.salotto
@@ -335,8 +457,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "79.86%"
-                  left: "22.00%"
+                  top: "80.14%"
+                  left: "29.45%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -350,8 +472,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "68.94%"
-                  left: "48.00%"
+                  top: "69.38%"
+                  left: "53.37%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -365,8 +487,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "51.69%"
-                  left: "60.33%"
+                  top: "52.36%"
+                  left: "64.72%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -380,8 +502,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "50.63%"
-                  left: "77.67%"
+                  top: "51.32%"
+                  left: "80.67%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -395,8 +517,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "67.89%"
-                  left: "82.33%"
+                  top: "68.33%"
+                  left: "84.97%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -410,8 +532,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "43.24%"
-                  left: "22.00%"
+                  top: "42.64%"
+                  left: "19.63%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -425,8 +547,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "30.56%"
-                  left: "40.00%"
+                  top: "30.14%"
+                  left: "36.20%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -440,8 +562,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "17.89%"
-                  left: "62.00%"
+                  top: "17.64%"
+                  left: "56.44%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -455,8 +577,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "24.93%"
-                  left: "79.00%"
+                  top: "24.58%"
+                  left: "72.09%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
@@ -470,8 +592,8 @@ views:
                 hold_action:
                   action: more-info
                 style:
-                  top: "22.46%"
-                  left: "90.00%"
+                  top: "22.15%"
+                  left: "82.21%"
                   --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"

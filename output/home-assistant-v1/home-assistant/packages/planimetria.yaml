@@ -40,6 +40,32 @@ input_boolean:
     name: Demo luce ripostiglio (mansarda)
     icon: mdi:archive
 
+# Massima e minima di oggi per il widget meteo (le previsioni non sono piu' attributi dell'entita').
+template:
+  - triggers:
+      - trigger: time_pattern
+        minutes: "/30"
+      - trigger: homeassistant
+        event: start
+    actions:
+      - action: weather.get_forecasts
+        target:
+          entity_id: weather.forecast_casa
+        data:
+          type: daily
+        response_variable: previsioni
+    sensor:
+      - name: Planimetria meteo massima
+        unique_id: planimetria_meteo_massima
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ previsioni['weather.forecast_casa'].forecast[0].temperature | round(1) }}"
+      - name: Planimetria meteo minima
+        unique_id: planimetria_meteo_minima
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ previsioni['weather.forecast_casa'].forecast[0].templow | round(1) }}"
+
 automation:
   - id: planimetria_notte_al_tramonto
     alias: Planimetria - notte al tramonto

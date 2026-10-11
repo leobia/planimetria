@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LOCAL = "/local/floorplan"
-VERSION = 2            # incrementare per forzare il refresh della cache del browser
+VERSION = 3            # incrementare per forzare il refresh della cache del browser
 NIGHT_FILTER = "brightness(45%) saturate(70%)"
 
 
@@ -25,6 +25,12 @@ def pct(v, total):
 
 def load():
     return json.loads((ROOT / "strumenti" / "stanze.json").read_text(encoding="utf-8"))
+
+
+def cat_center(cfg):
+    g = cfg["gatta"]
+    ox, oy = cfg["casa"]["offsets"][g["floor"]]
+    return [g["center"][0] + ox, g["center"][1] + oy]
 
 
 def house_rooms(cfg):
@@ -81,7 +87,8 @@ def build_manifest(cfg):
             "2 base notte (sopra la base giorno quando night_entity = on)",
             "3 overlay luce, uno per stanza, a tutta tela, non cliccabili",
             "4 gattina (SVG animato), scurita di notte se la luce della sua stanza e' spenta",
-            "5 icone di stato cliccabili sugli hotspot",
+            "5 widget meteo in alto a sinistra",
+            "6 icone di stato cliccabili sugli hotspot",
         ],
         "lighting": {
             "method": "overlay RGBA a tutta tela, fusione normale; stanza accesa ricavata dall'illustrazione originale + alone caldo ~2800 K",
@@ -99,12 +106,14 @@ def build_manifest(cfg):
         },
         "cat": {
             "file": f"www/floorplan/{g['file']}",
-            "center_px": g["center"],
+            "center_px": cat_center(cfg),
             "width_px": g["width"],
-            "center_pct": [round(g["center"][0] / w * 100, 2), round(g["center"][1] / h * 100, 2)],
+            "center_pct": [round(cat_center(cfg)[0] / w * 100, 2), round(cat_center(cfg)[1] / h * 100, 2)],
             "room": g["room"],
             "night_filter_when_room_off": NIGHT_FILTER,
         },
+        "weather": dict(cfg["meteo"], elements=[
+            {k: e[k] for k in ("kind", "x", "y", "what")} for e in weather_layout(cfg)]),
         "rooms": rooms,
     }
 
@@ -129,7 +138,8 @@ def picture_elements(cfg, entity_key):
     g = cfg["gatta"]
     cat_room = next(r for r in rooms if r["id"] == g["room"])
     v = f"?v={VERSION}"
-    cat_style = [f"top: {pct(g['center'][1], h)}", f"left: {pct(g['center'][0], w)}",
+    cx, cy = cat_center(cfg)
+    cat_style = [f"top: {pct(cy, h)}", f"left: {pct(cx, w)}",
                  f"width: {pct(g['width'], w)}", "pointer-events: none"]
     L = [
         "type: picture-elements",
@@ -188,6 +198,8 @@ def picture_elements(cfg, entity_key):
         L += ["        tap_action:", "          action: none"]
         L += yaml_style(cat_style, 8)
 
+    L.append("  # ---- meteo")
+    L += weather_elements(cfg)
     L.append("  # ---- comandi (sopra a tutto)")
     for r in rooms:
         x, y = r["hotspot"]
@@ -207,6 +219,57 @@ def picture_elements(cfg, entity_key):
             "border-radius: 50%",
             "padding: 3px",
         ])
+    return L
+
+
+WEATHER_TEXT = ["color: rgba(244, 240, 233, 0.96)", "text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7)",
+                "white-space: nowrap", "transform: translate(0, -50%)"]
+
+
+def weather_layout(cfg):
+    """Elementi del widget meteo: (tipo, x, y, contenuto) in pixel della tela casa."""
+    m = cfg["meteo"]
+    ax, ay = m["anchor"]
+    return [
+        {"kind": "condition", "x": ax + 50, "y": ay + 55, "what": m["entity"]},
+        {"kind": "big", "x": ax + 110, "y": ay + 55, "what": "temperature"},
+        {"kind": "icon", "x": ax + 124, "y": ay + 128, "what": "mdi:white-balance-sunny"},
+        {"kind": "small", "x": ax + 146, "y": ay + 128, "what": "max"},
+        {"kind": "icon", "x": ax + 284, "y": ay + 128, "what": "mdi:weather-night"},
+        {"kind": "small", "x": ax + 306, "y": ay + 128, "what": "min"},
+        {"kind": "icon", "x": ax + 124, "y": ay + 176, "what": "mdi:water-percent"},
+        {"kind": "small", "x": ax + 146, "y": ay + 176, "what": "humidity"},
+        {"kind": "icon", "x": ax + 284, "y": ay + 176, "what": "mdi:weather-windy"},
+        {"kind": "small", "x": ax + 306, "y": ay + 176, "what": "wind_speed"},
+    ]
+
+
+def weather_elements(cfg):
+    w, h = cfg["casa"]["size"]
+    m = cfg["meteo"]
+    L = []
+    for e in weather_layout(cfg):
+        pos = [f"top: {pct(e['y'], h)}", f"left: {pct(e['x'], w)}"]
+        if e["kind"] == "condition":
+            L += ["  - type: state-icon", f"    entity: {m['entity']}", "    state_color: false",
+                  "    tap_action:", "      action: more-info"]
+            L += yaml_style(pos, 4, ["--mdc-icon-size: clamp(34px, 4.4vw, 84px)",
+                                     "color: rgba(244, 240, 233, 0.96)"])
+        elif e["kind"] == "icon":
+            L += ["  - type: icon", f"    icon: {e['what']}", "    tap_action:", "      action: none"]
+            L += yaml_style(pos, 4, ["--mdc-icon-size: clamp(13px, 1.45vw, 26px)",
+                                     "color: rgba(244, 240, 233, 0.8)", "pointer-events: none"])
+        else:
+            size = "clamp(24px, 3.5vw, 66px)" if e["kind"] == "big" else "clamp(12px, 1.45vw, 26px)"
+            if e["what"] in ("max", "min"):
+                L += ["  - type: state-label", f"    entity: {m['sensor_' + e['what']]}"]
+            else:
+                unit = {"temperature": " °C", "humidity": "%", "wind_speed": " km/h"}[e["what"]]
+                L += ["  - type: state-label", f"    entity: {m['entity']}", f"    attribute: {e['what']}",
+                      f'    suffix: "{unit}"']
+            L += ["    tap_action:", "      action: more-info"]
+            L += yaml_style(pos, 4, WEATHER_TEXT + [f"font-size: {size}",
+                                                    "font-weight: " + ("500" if e["kind"] == "big" else "400")])
     return L
 
 
@@ -256,6 +319,33 @@ def package(cfg):
                 f"    name: Demo luce {r['label'].lower()} ({floor['label'].lower()})",
                 f"    icon: {r['icon']}",
             ]
+    m = cfg["meteo"]
+    L += [
+        "",
+        "# Massima e minima di oggi per il widget meteo (le previsioni non sono piu' attributi dell'entita').",
+        "template:",
+        "  - triggers:",
+        "      - trigger: time_pattern",
+        '        minutes: "/30"',
+        "      - trigger: homeassistant",
+        "        event: start",
+        "    actions:",
+        "      - action: weather.get_forecasts",
+        "        target:",
+        f"          entity_id: {m['entity']}",
+        "        data:",
+        "          type: daily",
+        "        response_variable: previsioni",
+        "    sensor:",
+    ]
+    for key, label, field in (("max", "massima", "temperature"), ("min", "minima", "templow")):
+        L += [
+            f"      - name: Planimetria meteo {label}",
+            f"        unique_id: planimetria_meteo_{label}",
+            '        unit_of_measurement: "°C"',
+            "        device_class: temperature",
+            f"        state: \"{{{{ previsioni['{m['entity']}'].forecast[0].{field} | round(1) }}}}\"",
+        ]
     L += [
         "",
         "automation:",
@@ -289,6 +379,7 @@ def preview(manifest, cfg):
         "base": manifest["base"],
         "nightFilter": NIGHT_FILTER,
         "cat": manifest["cat"],
+        "weather": manifest["weather"],
         "floors": [{"id": fid, "label": next(f["label"] for f in cfg["floors"] if f["id"] == fid)}
                    for fid in reversed(cfg["casa"]["order"])],
         "rooms": [
