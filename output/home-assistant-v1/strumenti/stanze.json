@@ -3,6 +3,19 @@
   "canvas": { "width": 1500, "height": 1049 },
   "night_entity": "input_boolean.planimetria_notte",
   "opacity": { "giorno": 0.6, "notte": 1.0 },
+  "casa": {
+    "_nota": "Vista unica: i due piani sulla stessa tela. offsets = posizione (x,y) di ogni illustrazione 1500x1049 sulla tela; order = dal fondo al davanti.",
+    "size": [1500, 1420],
+    "order": ["primo-piano", "mansarda"],
+    "offsets": { "primo-piano": [0, 434], "mansarda": [0, -66] }
+  },
+  "gatta": {
+    "_nota": "Gattina tigrata grigia sul letto della camera. center/width in pixel della tela casa; si scurisce di notte se la luce della stanza e' spenta.",
+    "file": "casa/gatta.svg",
+    "center": [896, 238],
+    "width": 54,
+    "room": "camera"
+  },
   "floors": [
     {
       "id": "primo-piano",

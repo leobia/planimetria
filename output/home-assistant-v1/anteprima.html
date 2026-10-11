@@ -16,17 +16,15 @@
   header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center;
     padding: 14px 16px; border-bottom: 1px solid var(--line); }
   h1 { font-size: 17px; font-weight: 600; margin: 0 auto 0 0; letter-spacing: .01em; }
-  .seg { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
-  .seg button { border: 0; background: none; color: var(--muted); padding: 7px 14px; border-radius: 7px; font: inherit; cursor: pointer; }
-  .seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
   .btn { border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 8px 12px;
     border-radius: 9px; font: inherit; cursor: pointer; }
   .btn:hover { border-color: var(--muted); }
   main { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; padding: 16px; max-width: 1500px; margin: 0 auto; }
   @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
 
-  .stage { position: relative; aspect-ratio: 1500 / 1049; width: 100%; border-radius: 12px; overflow: hidden; background: #1e1e1e; }
+  .stage { position: relative; width: 100%; margin: 0 auto; border-radius: 12px; overflow: hidden; background: #1e1e1e; }
   .stage img { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; }
+  .stage .night, .stage .light, .stage .cat { transition: opacity .45s ease, filter .45s ease; }
   .stage .night, .stage .light { opacity: 0; transition: opacity .45s ease; }
   .stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .zone { fill: transparent; stroke: transparent; stroke-width: 3; cursor: pointer; transition: stroke .15s, fill .15s; }
@@ -41,6 +39,8 @@
   @media (max-width: 600px) { .hot { width: 28px; height: 28px; } .hot svg { width: 15px; height: 15px; } }
 
   aside { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; align-self: start; }
+  aside h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin: 14px 0 2px; font-weight: 600; }
+  aside h3:first-of-type { margin-top: 0; }
   aside h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
   .row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
   .row:first-of-type { border-top: 0; }
@@ -61,7 +61,6 @@
 <body>
 <header>
   <h1>Planimetria · anteprima dashboard</h1>
-  <div class="seg" id="floors" role="group" aria-label="Piano"></div>
   <div class="daynight">
     <span>Giorno</span>
     <button class="sw nightsw" id="night" role="switch" aria-checked="false" aria-label="Modalità notte"></button>
@@ -71,7 +70,7 @@
 <main>
   <div class="stage" id="stage"></div>
   <aside>
-    <h2 id="roomsTitle">Luci</h2>
+    <h2>Luci</h2>
     <div id="rooms"></div>
     <div class="tools">
       <button class="btn" id="allOn">Accendi tutto</button>
@@ -83,94 +82,91 @@
     </div>
   </aside>
 </main>
-<footer>Stessi file usati da Home Assistant (<code>www/floorplan/</code>). Clic su una stanza o sulla sua icona per accenderla; più stanze possono restare accese insieme.</footer>
+<footer>Stessi file usati da Home Assistant (<code>www/floorplan/</code>). Clic su una stanza o sulla sua icona per accenderla; più stanze possono restare accese insieme. La gattina dorme in camera.</footer>
 <script>
-const DATA = {"canvas": {"width": 1500, "height": 1049}, "opacity": {"giorno": 0.6, "notte": 1.0}, "floors": [{"id": "primo-piano", "label": "Primo piano", "base": {"giorno": "www/floorplan/primo-piano/base-giorno.png", "notte": "www/floorplan/primo-piano/base-notte.png"}, "rooms": [{"id": "salotto", "label": "Salotto", "icon": "mdi:sofa", "overlay": "www/floorplan/primo-piano/luce-salotto.png", "polygon_px": [[40, 640], [440, 426], [452, 440], [642, 690], [232, 940], [200, 948], [40, 700]], "hotspot_px": [330, 700], "entity_demo": "input_boolean.planimetria_salotto", "entity_light": "light.salotto"}, {"id": "ingresso", "label": "Ingresso e scala", "icon": "mdi:stairs", "overlay": "www/floorplan/primo-piano/luce-ingresso.png", "polygon_px": [[440, 426], [482, 402], [480, 288], [530, 276], [640, 300], [690, 330], [700, 362], [795, 478], [1044, 350], [1044, 470], [1025, 486], [642, 690], [452, 440]], "hotspot_px": [720, 545], "entity_demo": "input_boolean.planimetria_ingresso", "entity_light": "light.ingresso"}, {"id": "cucina", "label": "Cucina", "icon": "mdi:stove", "overlay": "www/floorplan/primo-piano/luce-cucina.png", "polygon_px": [[666, 236], [980, 84], [1020, 98], [1030, 86], [1112, 138], [1120, 205], [1098, 216], [1046, 272], [1046, 348], [795, 478], [700, 362], [668, 320]], "hotspot_px": [905, 300], "entity_demo": "input_boolean.planimetria_cucina", "entity_light": "light.cucina"}, {"id": "bagno_giu", "label": "Bagno", "icon": "mdi:shower", "overlay": "www/floorplan/primo-piano/luce-bagno.png", "polygon_px": [[1046, 272], [1098, 216], [1173, 188], [1240, 230], [1260, 300], [1258, 322], [1108, 380], [1100, 345], [1046, 348]], "hotspot_px": [1165, 285], "entity_demo": "input_boolean.planimetria_bagno_giu", "entity_light": "light.bagno_primo_piano"}, {"id": "studio_giu", "label": "Studio", "icon": "mdi:desk", "overlay": "www/floorplan/primo-piano/luce-studio.png", "polygon_px": [[1044, 350], [1100, 345], [1108, 380], [1258, 322], [1298, 290], [1372, 336], [1374, 408], [1458, 488], [1208, 632], [1022, 482], [1044, 470]], "hotspot_px": [1235, 530], "entity_demo": "input_boolean.planimetria_studio_giu", "entity_light": "light.studio_primo_piano"}]}, {"id": "mansarda", "label": "Mansarda", "base": {"giorno": "www/floorplan/mansarda/base-giorno.png", "notte": "www/floorplan/mansarda/base-notte.png"}, "rooms": [{"id": "studio_su", "label": "Studio", "icon": "mdi:desk", "overlay": "www/floorplan/mansarda/luce-studio.png", "polygon_px": [[40, 585], [296, 446], [296, 412], [376, 360], [420, 380], [452, 412], [652, 638], [240, 925], [44, 715]], "hotspot_px": [330, 680], "entity_demo": "input_boolean.planimetria_studio_su", "entity_light": "light.studio_mansarda"}, {"id": "pianerottolo", "label": "Pianerottolo", "icon": "mdi:stairs", "overlay": "www/floorplan/mansarda/luce-pianerottolo.png", "polygon_px": [[420, 398], [665, 282], [690, 296], [694, 412], [750, 494], [806, 470], [818, 488], [882, 518], [902, 508], [652, 638], [452, 412]], "hotspot_px": [600, 500], "entity_demo": "input_boolean.planimetria_pianerottolo", "entity_light": "light.pianerottolo"}, {"id": "camera", "label": "Camera", "icon": "mdi:bed", "overlay": "www/floorplan/mansarda/luce-camera.png", "polygon_px": [[665, 282], [986, 86], [1215, 272], [1240, 290], [1200, 322], [1140, 287], [1120, 274], [1048, 276], [1046, 360], [1050, 402], [1000, 432], [902, 508], [882, 518], [818, 488], [806, 470], [750, 494], [694, 412], [690, 296]], "hotspot_px": [930, 320], "entity_demo": "input_boolean.planimetria_camera", "entity_light": "light.camera"}, {"id": "bagno_su", "label": "Bagno", "icon": "mdi:shower", "overlay": "www/floorplan/mansarda/luce-bagno.png", "polygon_px": [[1046, 360], [1048, 276], [1120, 274], [1140, 287], [1308, 404], [1308, 412], [1197, 488]], "hotspot_px": [1185, 420], "entity_demo": "input_boolean.planimetria_bagno_su", "entity_light": "light.bagno_mansarda"}, {"id": "ripostiglio", "label": "Ripostiglio", "icon": "mdi:archive", "overlay": "www/floorplan/mansarda/luce-ripostiglio.png", "polygon_px": [[1200, 322], [1248, 295], [1248, 250], [1272, 238], [1402, 345], [1430, 412], [1308, 480], [1308, 414]], "hotspot_px": [1350, 385], "entity_demo": "input_boolean.planimetria_ripostiglio", "entity_light": "light.ripostiglio"}]}]};
+const DATA = {"canvas": {"width": 1500, "height": 1420}, "opacity": {"giorno": 0.6, "notte": 1.0}, "base": {"giorno": "www/floorplan/casa/base-giorno.png", "notte": "www/floorplan/casa/base-notte.png"}, "nightFilter": "brightness(45%) saturate(70%)", "cat": {"file": "www/floorplan/casa/gatta.svg", "center_px": [896, 238], "width_px": 54, "center_pct": [59.73, 16.76], "room": "camera", "night_filter_when_room_off": "brightness(45%) saturate(70%)"}, "floors": [{"id": "mansarda", "label": "Mansarda"}, {"id": "primo-piano", "label": "Primo piano"}], "rooms": [{"id": "salotto", "label": "Salotto", "floor": "primo-piano", "icon": "mdi:sofa", "overlay": "www/floorplan/casa/luce-salotto.png", "polygon_px": [[40, 1074], [440, 860], [452, 874], [642, 1124], [232, 1374], [200, 1382], [40, 1134]], "hotspot_px": [330, 1134], "entity_demo": "input_boolean.planimetria_salotto", "entity_light": "light.salotto"}, {"id": "ingresso", "label": "Ingresso e scala", "floor": "primo-piano", "icon": "mdi:stairs", "overlay": "www/floorplan/casa/luce-ingresso.png", "polygon_px": [[440, 860], [482, 836], [480, 722], [530, 710], [640, 734], [690, 764], [700, 796], [795, 912], [1044, 784], [1044, 904], [1025, 920], [642, 1124], [452, 874]], "hotspot_px": [720, 979], "entity_demo": "input_boolean.planimetria_ingresso", "entity_light": "light.ingresso"}, {"id": "cucina", "label": "Cucina", "floor": "primo-piano", "icon": "mdi:stove", "overlay": "www/floorplan/casa/luce-cucina.png", "polygon_px": [[666, 670], [980, 518], [1020, 532], [1030, 520], [1112, 572], [1120, 639], [1098, 650], [1046, 706], [1046, 782], [795, 912], [700, 796], [668, 754]], "hotspot_px": [905, 734], "entity_demo": "input_boolean.planimetria_cucina", "entity_light": "light.cucina"}, {"id": "bagno_giu", "label": "Bagno", "floor": "primo-piano", "icon": "mdi:shower", "overlay": "www/floorplan/casa/luce-bagno-giu.png", "polygon_px": [[1046, 706], [1098, 650], [1173, 622], [1240, 664], [1260, 734], [1258, 756], [1108, 814], [1100, 779], [1046, 782]], "hotspot_px": [1165, 719], "entity_demo": "input_boolean.planimetria_bagno_giu", "entity_light": "light.bagno_primo_piano"}, {"id": "studio_giu", "label": "Studio", "floor": "primo-piano", "icon": "mdi:desk", "overlay": "www/floorplan/casa/luce-studio-giu.png", "polygon_px": [[1044, 784], [1100, 779], [1108, 814], [1258, 756], [1298, 724], [1372, 770], [1374, 842], [1458, 922], [1208, 1066], [1022, 916], [1044, 904]], "hotspot_px": [1235, 964], "entity_demo": "input_boolean.planimetria_studio_giu", "entity_light": "light.studio_primo_piano"}, {"id": "studio_su", "label": "Studio", "floor": "mansarda", "icon": "mdi:desk", "overlay": "www/floorplan/casa/luce-studio-su.png", "polygon_px": [[40, 519], [296, 380], [296, 346], [376, 294], [420, 314], [452, 346], [652, 572], [240, 859], [44, 649]], "hotspot_px": [330, 614], "entity_demo": "input_boolean.planimetria_studio_su", "entity_light": "light.studio_mansarda"}, {"id": "pianerottolo", "label": "Pianerottolo", "floor": "mansarda", "icon": "mdi:stairs", "overlay": "www/floorplan/casa/luce-pianerottolo.png", "polygon_px": [[420, 332], [665, 216], [690, 230], [694, 346], [750, 428], [806, 404], [818, 422], [882, 452], [902, 442], [652, 572], [452, 346]], "hotspot_px": [600, 434], "entity_demo": "input_boolean.planimetria_pianerottolo", "entity_light": "light.pianerottolo"}, {"id": "camera", "label": "Camera", "floor": "mansarda", "icon": "mdi:bed", "overlay": "www/floorplan/casa/luce-camera.png", "polygon_px": [[665, 216], [986, 20], [1215, 206], [1240, 224], [1200, 256], [1140, 221], [1120, 208], [1048, 210], [1046, 294], [1050, 336], [1000, 366], [902, 442], [882, 452], [818, 422], [806, 404], [750, 428], [694, 346], [690, 230]], "hotspot_px": [930, 254], "entity_demo": "input_boolean.planimetria_camera", "entity_light": "light.camera"}, {"id": "bagno_su", "label": "Bagno", "floor": "mansarda", "icon": "mdi:shower", "overlay": "www/floorplan/casa/luce-bagno-su.png", "polygon_px": [[1046, 294], [1048, 210], [1120, 208], [1140, 221], [1308, 338], [1308, 346], [1197, 422]], "hotspot_px": [1185, 354], "entity_demo": "input_boolean.planimetria_bagno_su", "entity_light": "light.bagno_mansarda"}, {"id": "ripostiglio", "label": "Ripostiglio", "floor": "mansarda", "icon": "mdi:archive", "overlay": "www/floorplan/casa/luce-ripostiglio.png", "polygon_px": [[1200, 256], [1248, 229], [1248, 184], [1272, 172], [1402, 279], [1430, 346], [1308, 414], [1308, 348]], "hotspot_px": [1350, 319], "entity_demo": "input_boolean.planimetria_ripostiglio", "entity_light": "light.ripostiglio"}]};
 const BULB = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-4 12.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26A7 7 0 0 0 12 2Zm-3 18a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>';
-const state = { floor: DATA.floors[0].id, night: false, on: {} };
-try { Object.assign(state, JSON.parse(localStorage.getItem('planimetria-anteprima') || '{}')); } catch (e) {}
-const save = () => { try { localStorage.setItem('planimetria-anteprima', JSON.stringify(state)); } catch (e) {} };
+const state = { night: false, on: {} };
+try { Object.assign(state, JSON.parse(localStorage.getItem('planimetria-casa') || '{}')); } catch (e) {}
+const save = () => { try { localStorage.setItem('planimetria-casa', JSON.stringify(state)); } catch (e) {} };
 
 const $ = (id) => document.getElementById(id);
 const W = DATA.canvas.width, H = DATA.canvas.height;
-const floorsEl = $('floors'), stage = $('stage'), roomsEl = $('rooms');
+const stage = $('stage'), roomsEl = $('rooms');
+stage.style.aspectRatio = W + ' / ' + H;
+stage.style.maxWidth = `calc((100vh - 110px) * ${W / H})`;
 
-// preload: niente sfarfallio al cambio piano
-DATA.floors.forEach(f => [f.base.giorno, f.base.notte, ...f.rooms.map(r => r.overlay)].forEach(src => { new Image().src = src; }));
-
-DATA.floors.forEach(f => {
-  const b = document.createElement('button');
-  b.textContent = f.label; b.dataset.floor = f.id;
-  b.onclick = () => { state.floor = f.id; render(); };
-  floorsEl.append(b);
-});
-
-function key(f, r) { return f + '/' + r; }
-function toggle(f, r) { const k = key(f, r); state.on[k] = !state.on[k]; update(); }
+function toggle(id) { state.on[id] = !state.on[id]; update(); }
 
 function render() {
-  const floor = DATA.floors.find(f => f.id === state.floor) || DATA.floors[0];
-  state.floor = floor.id;
-  floorsEl.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.floor === floor.id));
-  stage.innerHTML = '';
-  const add = (cls, src, id) => { const i = new Image(); i.className = cls; i.src = src; i.alt = ''; if (id) i.dataset.room = id; stage.append(i); };
-  add('day', floor.base.giorno);
-  add('night', floor.base.notte);
-  floor.rooms.forEach(r => add('light', r.overlay, r.id));
+  const add = (cls, src, id) => { const i = new Image(); i.className = cls; i.src = src; i.alt = ''; if (id) i.dataset.room = id; stage.append(i); return i; };
+  add('day', DATA.base.giorno);
+  add('night', DATA.base.notte);
+  DATA.rooms.forEach(r => add('light', r.overlay, r.id));
+
+  const c = DATA.cat, cat = add('cat', c.file);
+  cat.style.inset = 'auto';
+  cat.alt = 'Gattina tigrata grigia';
+  Object.assign(cat.style, {
+    left: (c.center_px[0] - c.width_px / 2) / W * 100 + '%',
+    top: (c.center_px[1] - c.width_px * 0.375) / H * 100 + '%',
+    width: c.width_px / W * 100 + '%', height: 'auto',
+  });
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  floor.rooms.forEach(r => {
+  DATA.rooms.forEach(r => {
     const p = document.createElementNS(svg.namespaceURI, 'polygon');
     p.setAttribute('points', r.polygon_px.map(q => q.join(',')).join(' '));
     p.setAttribute('class', 'zone'); p.setAttribute('tabindex', '0'); p.setAttribute('role', 'button');
     p.setAttribute('aria-label', r.label);
-    p.onclick = () => toggle(floor.id, r.id);
-    p.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(floor.id, r.id); } };
+    p.onclick = () => toggle(r.id);
+    p.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(r.id); } };
     svg.append(p);
   });
   stage.append(svg);
 
-  floor.rooms.forEach(r => {
+  DATA.rooms.forEach(r => {
     const b = document.createElement('button');
     b.className = 'hot'; b.innerHTML = BULB; b.dataset.room = r.id; b.title = r.label;
     b.style.left = (r.hotspot_px[0] / W * 100) + '%'; b.style.top = (r.hotspot_px[1] / H * 100) + '%';
-    b.onclick = () => toggle(floor.id, r.id);
+    b.onclick = () => toggle(r.id);
     stage.append(b);
   });
 
-  roomsEl.innerHTML = '';
-  floor.rooms.forEach(r => {
-    const row = document.createElement('div'); row.className = 'row';
-    row.innerHTML = `<span class="name">${r.label}<span class="ent"></span></span>`;
-    const sw = document.createElement('button');
-    sw.className = 'sw'; sw.setAttribute('role', 'switch'); sw.setAttribute('aria-label', r.label); sw.dataset.room = r.id;
-    sw.onclick = () => toggle(floor.id, r.id);
-    row.append(sw); row.dataset.room = r.id; roomsEl.append(row);
+  DATA.floors.forEach(f => {
+    const h = document.createElement('h3'); h.textContent = f.label; roomsEl.append(h);
+    DATA.rooms.filter(r => r.floor === f.id).forEach(r => {
+      const row = document.createElement('div'); row.className = 'row';
+      row.innerHTML = `<span class="name">${r.label}<span class="ent"></span></span>`;
+      const sw = document.createElement('button');
+      sw.className = 'sw'; sw.setAttribute('role', 'switch'); sw.setAttribute('aria-label', r.label); sw.dataset.room = r.id;
+      sw.onclick = () => toggle(r.id);
+      row.append(sw); row.dataset.room = r.id; roomsEl.append(row);
+    });
   });
-  $('roomsTitle').textContent = 'Luci · ' + floor.label;
   update();
 }
 
 function update() {
-  const floor = DATA.floors.find(f => f.id === state.floor);
   const op = state.night ? DATA.opacity.notte : DATA.opacity.giorno;
   stage.querySelector('img.night').style.opacity = state.night ? 1 : 0;
-  floor.rooms.forEach(r => {
-    const on = !!state.on[key(floor.id, r.id)];
+  DATA.rooms.forEach(r => {
+    const on = !!state.on[r.id];
     stage.querySelector(`img.light[data-room="${r.id}"]`).style.opacity = on ? op : 0;
     stage.querySelector(`.hot[data-room="${r.id}"]`).setAttribute('aria-pressed', on);
     roomsEl.querySelector(`.sw[data-room="${r.id}"]`).setAttribute('aria-checked', on);
     roomsEl.querySelector(`.row[data-room="${r.id}"] .ent`).textContent = $('real').checked ? r.entity_light : r.entity_demo;
   });
+  stage.querySelector('img.cat').style.filter = state.night && !state.on[DATA.cat.room] ? DATA.nightFilter : 'none';
   $('night').setAttribute('aria-checked', state.night);
   stage.classList.toggle('show-zones', $('zones').checked);
   save();
 }
 
 $('night').onclick = () => { state.night = !state.night; update(); };
-$('allOn').onclick = () => { DATA.floors.find(f => f.id === state.floor).rooms.forEach(r => state.on[key(state.floor, r.id)] = true); update(); };
-$('allOff').onclick = () => { DATA.floors.find(f => f.id === state.floor).rooms.forEach(r => state.on[key(state.floor, r.id)] = false); update(); };
+$('allOn').onclick = () => { DATA.rooms.forEach(r => state.on[r.id] = true); update(); };
+$('allOff').onclick = () => { DATA.rooms.forEach(r => state.on[r.id] = false); update(); };
 $('zones').onchange = update;
 $('real').onchange = update;
 render();

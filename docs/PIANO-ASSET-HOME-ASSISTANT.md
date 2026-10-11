@@ -77,6 +77,6 @@ Il numero finale degli asset dipende dai circuiti indipendenti e dagli stati eff
 
 ## Stato (11 ottobre 2026)
 
-La V1 è pronta in `output/home-assistant-v1/`: basi giorno/notte, 10 overlay luce deterministici,
+La V1 è pronta in `output/home-assistant-v1/`: vista unica della casa (due piani sulla stessa tela), basi giorno/notte, 10 overlay luce deterministici, gattina,
 manifest, anteprima HTML, pacchetto e dashboard YAML (demo e segnaposto `light.*`).
 Installazione e rigenerazione: `output/home-assistant-v1/README.md`.

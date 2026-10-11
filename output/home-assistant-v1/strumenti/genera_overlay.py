@@ -1,6 +1,6 @@
 """Genera gli overlay luce (uno per stanza) per la planimetria Home Assistant.
 
-Ogni overlay e' un PNG RGBA 1500x1049 allineato al pixel con le illustrazioni v2.
+Scrive in livelli/<piano>/. Ogni overlay e' un PNG RGBA 1500x1049 allineato al pixel con le illustrazioni v2.
 Il contenuto della stanza accesa deriva dall'illustrazione originale (gia' calda),
 con un leggero alone caldo centrato sul punto della stanza: la geometria resta
 identica perche' nessun pixel viene ridisegnato o spostato.
@@ -52,15 +52,14 @@ def build_overlay(src, labels, idx, room):
 def main():
     cfg = json.loads((ROOT / "strumenti" / "stanze.json").read_text(encoding="utf-8"))
     size = (cfg["canvas"]["width"], cfg["canvas"]["height"])
-    www = ROOT / "www" / "floorplan"
-    Image.new("RGBA", size, (0, 0, 0, 0)).save(www / "trasparente.png", optimize=True)
+    layers = ROOT / "livelli"
     for floor in cfg["floors"]:
         src_img = Image.open((ROOT / floor["source"]).resolve()).convert("RGB")
         assert src_img.size == size, f"{floor['id']}: dimensioni inattese {src_img.size}"
         src = np.asarray(src_img, dtype=np.float32)
         labels = room_labels(floor, size)
         for idx, room in enumerate(floor["rooms"], start=1):
-            out = www / floor["id"] / f"luce-{room['id'].split('_')[0]}.png"
+            out = layers / floor["id"] / f"luce-{room['id'].split('_')[0]}.png"
             build_overlay(src, labels, idx, room).save(out, optimize=True)
             print("scritto", out.relative_to(ROOT))
 

@@ -3,9 +3,9 @@
 # Versione LUCI: gli entity_id light.* sono SEGNAPOSTO, aggiornarli in stanze.json (entity_light).
 title: Planimetria
 views:
-  - title: Primo piano
-    path: primo-piano
-    icon: mdi:home-floor-1
+  - title: Casa
+    path: casa
+    icon: mdi:home
     type: panel
     cards:
       - type: vertical-stack
@@ -15,8 +15,7 @@ views:
               - entity: input_boolean.planimetria_notte
                 name: Modalità notte
           - type: picture-elements
-            title: Primo piano
-            image: /local/floorplan/primo-piano/base-giorno.png?v=1
+            image: /local/floorplan/casa/base-giorno.png?v=2
             elements:
               # ---- giorno
               - type: conditional
@@ -27,9 +26,9 @@ views:
                 elements:
                   - type: image
                     entity: light.salotto
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-salotto.png?v=1
+                      "on": /local/floorplan/casa/luce-salotto.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -40,9 +39,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.ingresso
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-ingresso.png?v=1
+                      "on": /local/floorplan/casa/luce-ingresso.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -53,9 +52,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.cucina
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-cucina.png?v=1
+                      "on": /local/floorplan/casa/luce-cucina.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -66,9 +65,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.bagno_primo_piano
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-bagno.png?v=1
+                      "on": /local/floorplan/casa/luce-bagno-giu.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -79,9 +78,9 @@ views:
                       opacity: 0.6
                   - type: image
                     entity: light.studio_primo_piano
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-studio.png?v=1
+                      "on": /local/floorplan/casa/luce-studio-giu.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -90,6 +89,81 @@ views:
                       width: "100%"
                       pointer-events: none
                       opacity: 0.6
+                  - type: image
+                    entity: light.studio_mansarda
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-studio-su.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 0.6
+                  - type: image
+                    entity: light.pianerottolo
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-pianerottolo.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 0.6
+                  - type: image
+                    entity: light.camera
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-camera.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 0.6
+                  - type: image
+                    entity: light.bagno_mansarda
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-bagno-su.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 0.6
+                  - type: image
+                    entity: light.ripostiglio
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-ripostiglio.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 0.6
+                  # gattina (camera)
+                  - type: image
+                    image: /local/floorplan/casa/gatta.svg?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "16.76%"
+                      left: "59.73%"
+                      width: "3.60%"
+                      pointer-events: none
               # ---- notte
               - type: conditional
                 conditions:
@@ -98,7 +172,7 @@ views:
                     state: "on"
                 elements:
                   - type: image
-                    image: /local/floorplan/primo-piano/base-notte.png?v=1
+                    image: /local/floorplan/casa/base-notte.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -108,9 +182,9 @@ views:
                       pointer-events: none
                   - type: image
                     entity: light.salotto
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-salotto.png?v=1
+                      "on": /local/floorplan/casa/luce-salotto.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -121,9 +195,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.ingresso
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-ingresso.png?v=1
+                      "on": /local/floorplan/casa/luce-ingresso.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -134,9 +208,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.cucina
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-cucina.png?v=1
+                      "on": /local/floorplan/casa/luce-cucina.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -147,9 +221,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.bagno_primo_piano
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-bagno.png?v=1
+                      "on": /local/floorplan/casa/luce-bagno-giu.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -160,9 +234,9 @@ views:
                       opacity: 1.0
                   - type: image
                     entity: light.studio_primo_piano
-                    image: /local/floorplan/trasparente.png?v=1
+                    image: /local/floorplan/casa/trasparente.png?v=2
                     state_image:
-                      "on": /local/floorplan/primo-piano/luce-studio.png?v=1
+                      "on": /local/floorplan/casa/luce-studio-giu.png?v=2
                     tap_action:
                       action: none
                     style:
@@ -171,323 +245,234 @@ views:
                       width: "100%"
                       pointer-events: none
                       opacity: 1.0
+                  - type: image
+                    entity: light.studio_mansarda
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-studio-su.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 1.0
+                  - type: image
+                    entity: light.pianerottolo
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-pianerottolo.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 1.0
+                  - type: image
+                    entity: light.camera
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-camera.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 1.0
+                  - type: image
+                    entity: light.bagno_mansarda
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-bagno-su.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 1.0
+                  - type: image
+                    entity: light.ripostiglio
+                    image: /local/floorplan/casa/trasparente.png?v=2
+                    state_image:
+                      "on": /local/floorplan/casa/luce-ripostiglio.png?v=2
+                    tap_action:
+                      action: none
+                    style:
+                      top: "50%"
+                      left: "50%"
+                      width: "100%"
+                      pointer-events: none
+                      opacity: 1.0
+                  # gattina (camera)
+                  - type: image
+                    image: /local/floorplan/casa/gatta.svg?v=2
+                    entity: light.camera
+                    state_filter:
+                      "off": brightness(45%) saturate(70%)
+                      "unavailable": brightness(45%) saturate(70%)
+                      "unknown": brightness(45%) saturate(70%)
+                    tap_action:
+                      action: none
+                    style:
+                      top: "16.76%"
+                      left: "59.73%"
+                      width: "3.60%"
+                      pointer-events: none
               # ---- comandi (sopra a tutto)
               - type: state-icon
                 entity: light.salotto
                 icon: mdi:sofa
-                title: Salotto
+                title: Salotto (primo piano)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "66.73%"
+                  top: "79.86%"
                   left: "22.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.ingresso
                 icon: mdi:stairs
-                title: Ingresso e scala
+                title: Ingresso e scala (primo piano)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "51.95%"
+                  top: "68.94%"
                   left: "48.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.cucina
                 icon: mdi:stove
-                title: Cucina
+                title: Cucina (primo piano)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "28.60%"
+                  top: "51.69%"
                   left: "60.33%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.bagno_primo_piano
                 icon: mdi:shower
-                title: Bagno
+                title: Bagno (primo piano)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "27.17%"
+                  top: "50.63%"
                   left: "77.67%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.studio_primo_piano
                 icon: mdi:desk
-                title: Studio
+                title: Studio (primo piano)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "50.52%"
+                  top: "67.89%"
                   left: "82.33%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
-  - title: Mansarda
-    path: mansarda
-    icon: mdi:home-roof
-    type: panel
-    cards:
-      - type: vertical-stack
-        cards:
-          - type: entities
-            entities:
-              - entity: input_boolean.planimetria_notte
-                name: Modalità notte
-          - type: picture-elements
-            title: Mansarda
-            image: /local/floorplan/mansarda/base-giorno.png?v=1
-            elements:
-              # ---- giorno
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: input_boolean.planimetria_notte
-                    state: "off"
-                elements:
-                  - type: image
-                    entity: light.studio_mansarda
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-studio.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 0.6
-                  - type: image
-                    entity: light.pianerottolo
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-pianerottolo.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 0.6
-                  - type: image
-                    entity: light.camera
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-camera.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 0.6
-                  - type: image
-                    entity: light.bagno_mansarda
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-bagno.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 0.6
-                  - type: image
-                    entity: light.ripostiglio
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-ripostiglio.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 0.6
-              # ---- notte
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: input_boolean.planimetria_notte
-                    state: "on"
-                elements:
-                  - type: image
-                    image: /local/floorplan/mansarda/base-notte.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                  - type: image
-                    entity: light.studio_mansarda
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-studio.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 1.0
-                  - type: image
-                    entity: light.pianerottolo
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-pianerottolo.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 1.0
-                  - type: image
-                    entity: light.camera
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-camera.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 1.0
-                  - type: image
-                    entity: light.bagno_mansarda
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-bagno.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 1.0
-                  - type: image
-                    entity: light.ripostiglio
-                    image: /local/floorplan/trasparente.png?v=1
-                    state_image:
-                      "on": /local/floorplan/mansarda/luce-ripostiglio.png?v=1
-                    tap_action:
-                      action: none
-                    style:
-                      top: "50%"
-                      left: "50%"
-                      width: "100%"
-                      pointer-events: none
-                      opacity: 1.0
-              # ---- comandi (sopra a tutto)
+                  padding: 3px
               - type: state-icon
                 entity: light.studio_mansarda
                 icon: mdi:desk
-                title: Studio
+                title: Studio (mansarda)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "64.82%"
+                  top: "43.24%"
                   left: "22.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.pianerottolo
                 icon: mdi:stairs
-                title: Pianerottolo
+                title: Pianerottolo (mansarda)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "47.66%"
+                  top: "30.56%"
                   left: "40.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.camera
                 icon: mdi:bed
-                title: Camera
+                title: Camera (mansarda)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "30.51%"
+                  top: "17.89%"
                   left: "62.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.bagno_mansarda
                 icon: mdi:shower
-                title: Bagno
+                title: Bagno (mansarda)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "40.04%"
+                  top: "24.93%"
                   left: "79.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
               - type: state-icon
                 entity: light.ripostiglio
                 icon: mdi:archive
-                title: Ripostiglio
+                title: Ripostiglio (mansarda)
                 tap_action:
                   action: toggle
                 hold_action:
                   action: more-info
                 style:
-                  top: "36.70%"
+                  top: "22.46%"
                   left: "90.00%"
-                  --mdc-icon-size: 30px
+                  --mdc-icon-size: 26px
                   background: rgba(20, 20, 24, 0.55)
                   border-radius: "50%"
-                  padding: 4px
+                  padding: 3px
