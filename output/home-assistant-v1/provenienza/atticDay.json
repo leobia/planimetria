@@ -1,6 +1,0 @@
-{
-  "tool": "image_gen built-in",
-  "source": "C:\\Users\\leona\\.codex\\generated_images\\01a129bc-c57f-7360-a0f7-6badcfcc7d4a\\exec-0052fb89-cb96-461a-8a09-c32ddc2d69fe.png",
-  "destination": "mansarda/base-giorno.png",
-  "prompt": "Use case: lighting-weather. Asset: Home Assistant floorplan DAY BASE with artificial room lights OFF. Edit target: supplied floorplan 1500x1049. Change ONLY the lighting to gentle neutral daylight. Remove warm artificial light glow from lamps, while keeping ALL lamps and furniture present; both bedside lamp shades are unlit ivory, TV and computer screens remain black. Keep the dark charcoal background, exact framing, size, camera, architectural edges and every object position unchanged. No new objects, no crop, no zoom, no labels. Preserve the original illustration pixel registration: this image will have room-state layers superimposed. A single whole-floor image. Daylight should be naturally soft and slightly less warm than the source, still welcoming and readable."
-}

@@ -44,3 +44,10 @@ python build_project.py
 Lo script sovrascrive il progetto principale. Eventuali modifiche fatte direttamente in Sweet Home 3D vanno riportate nello script prima di rigenerare, altrimenti saranno perse.
 
 L'XML intermedio e l'anteprima sono file generati esclusi da Git. Il progetto `.sh3d` contiene i modelli necessari e viene versionato insieme allo script.
+
+## Illustrazioni e Home Assistant
+
+`output/illustrazione-nuova/` contiene le due illustrazioni isometriche (v2) ricavate da questo modello.
+La dashboard interattiva di Home Assistant che le usa, con script, asset e documentazione, è nel progetto
+privato https://github.com/leobia/home-assistant (cartella `planimetria/`). Questo repository resta
+l'archivio del modello Sweet Home 3D.

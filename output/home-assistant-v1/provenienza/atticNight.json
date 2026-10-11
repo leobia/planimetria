@@ -1,6 +1,0 @@
-{
-  "tool": "image_gen built-in",
-  "source": "C:\\Users\\leona\\.codex\\generated_images\\01a129bc-c57f-7360-a0f7-6badcfcc7d4a\\exec-191edbd0-7c2d-4e6f-b5e3-89ec5b30ffe3.png",
-  "destination": "mansarda/base-notte.png",
-  "prompt": "Use case: lighting-weather. Asset type: Home Assistant floorplan NIGHT BASE, all controllable room lights OFF. Edit target: supplied attic-floor illustration, 1500x1049. Change ONLY the lighting: dim neutral-cool nighttime ambient illumination, sufficiently readable furniture and architecture, no warm light pools and no glowing bedside lamps. Keep the charcoal background exactly as original. ABSOLUTE invariants: exact original canvas framing/aspect ratio, viewpoint, camera, floorplan silhouette, room partition walls, stairs, furniture, every object and every pixel edge position. Do not redraw, move, add, remove, relabel, crop or zoom anything. Keep TV/computer screens black. No ceiling fixtures, no added objects, no text. This will be used beneath precisely aligned room overlays so exact registration is vital. Produce one full-floor image, not a comparison or montage."
-}
