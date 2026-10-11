@@ -1,0 +1,82 @@
+{
+  "_nota": "Sorgente unica delle stanze. Coordinate in pixel sulla tela 1500x1049 delle illustrazioni v2. Modificare qui e rieseguire genera_overlay.py e genera_integrazione.py. entity_light: segnaposto da sostituire con gli entity_id reali.",
+  "canvas": { "width": 1500, "height": 1049 },
+  "night_entity": "input_boolean.planimetria_notte",
+  "opacity": { "giorno": 0.6, "notte": 1.0 },
+  "floors": [
+    {
+      "id": "primo-piano",
+      "label": "Primo piano",
+      "source": "../illustrazione-nuova/01-primo-piano-v2.png",
+      "rooms": [
+        {
+          "id": "salotto", "label": "Salotto", "icon": "mdi:sofa",
+          "entity_demo": "input_boolean.planimetria_salotto", "entity_light": "light.salotto",
+          "hotspot": [330, 700],
+          "polygon": [[40,640],[440,426],[452,440],[642,690],[232,940],[200,948],[40,700]]
+        },
+        {
+          "id": "ingresso", "label": "Ingresso e scala", "icon": "mdi:stairs",
+          "entity_demo": "input_boolean.planimetria_ingresso", "entity_light": "light.ingresso",
+          "hotspot": [720, 545],
+          "polygon": [[440,426],[482,402],[480,288],[530,276],[640,300],[690,330],[700,362],[795,478],[1044,350],[1044,470],[1025,486],[642,690],[452,440]]
+        },
+        {
+          "id": "cucina", "label": "Cucina", "icon": "mdi:stove",
+          "entity_demo": "input_boolean.planimetria_cucina", "entity_light": "light.cucina",
+          "hotspot": [905, 300],
+          "polygon": [[666,236],[980,84],[1020,98],[1030,86],[1112,138],[1120,205],[1098,216],[1046,272],[1046,348],[795,478],[700,362],[668,320]]
+        },
+        {
+          "id": "bagno_giu", "label": "Bagno", "icon": "mdi:shower",
+          "entity_demo": "input_boolean.planimetria_bagno_giu", "entity_light": "light.bagno_primo_piano",
+          "hotspot": [1165, 285],
+          "polygon": [[1046,272],[1098,216],[1173,188],[1240,230],[1260,300],[1258,322],[1108,380],[1100,345],[1046,348]]
+        },
+        {
+          "id": "studio_giu", "label": "Studio", "icon": "mdi:desk",
+          "entity_demo": "input_boolean.planimetria_studio_giu", "entity_light": "light.studio_primo_piano",
+          "hotspot": [1235, 530],
+          "polygon": [[1044,350],[1100,345],[1108,380],[1258,322],[1298,290],[1372,336],[1374,408],[1458,488],[1208,632],[1022,482],[1044,470]]
+        }
+      ]
+    },
+    {
+      "id": "mansarda",
+      "label": "Mansarda",
+      "source": "../illustrazione-nuova/02-mansarda-v2.png",
+      "rooms": [
+        {
+          "id": "studio_su", "label": "Studio", "icon": "mdi:desk",
+          "entity_demo": "input_boolean.planimetria_studio_su", "entity_light": "light.studio_mansarda",
+          "hotspot": [330, 680],
+          "polygon": [[40,585],[296,446],[296,412],[376,360],[420,380],[452,412],[652,638],[240,925],[44,715]]
+        },
+        {
+          "id": "pianerottolo", "label": "Pianerottolo", "icon": "mdi:stairs",
+          "entity_demo": "input_boolean.planimetria_pianerottolo", "entity_light": "light.pianerottolo",
+          "hotspot": [600, 500],
+          "polygon": [[420,398],[665,282],[690,296],[694,412],[750,494],[806,470],[818,488],[882,518],[902,508],[652,638],[452,412]]
+        },
+        {
+          "id": "camera", "label": "Camera", "icon": "mdi:bed",
+          "entity_demo": "input_boolean.planimetria_camera", "entity_light": "light.camera",
+          "hotspot": [930, 320],
+          "polygon": [[665,282],[986,86],[1215,272],[1240,290],[1200,322],[1140,287],[1120,274],[1048,276],[1046,360],[1050,402],[1000,432],[902,508],[882,518],[818,488],[806,470],[750,494],[694,412],[690,296]]
+        },
+        {
+          "id": "bagno_su", "label": "Bagno", "icon": "mdi:shower",
+          "entity_demo": "input_boolean.planimetria_bagno_su", "entity_light": "light.bagno_mansarda",
+          "hotspot": [1185, 420],
+          "polygon": [[1046,360],[1048,276],[1120,274],[1140,287],[1308,404],[1308,412],[1197,488]]
+        },
+        {
+          "id": "ripostiglio", "label": "Ripostiglio", "icon": "mdi:archive",
+          "entity_demo": "input_boolean.planimetria_ripostiglio", "entity_light": "light.ripostiglio",
+          "hotspot": [1350, 385],
+          "polygon": [[1200,322],[1248,295],[1248,250],[1272,238],[1402,345],[1430,412],[1308,480],[1308,414]]
+        }
+      ]
+    }
+  ]
+}

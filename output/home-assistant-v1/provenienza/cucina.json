@@ -1,0 +1,6 @@
+{
+  "tool": "image_gen built-in",
+  "source": "C:\\Users\\leona\\.codex\\generated_images\\01a129bc-c57f-7360-a0f7-6badcfcc7d4a\\exec-308b7e10-6fc4-4d28-bf51-fccd5a043b4a.png",
+  "destination": "primo-piano/luce-cucina.png",
+  "prompt": "Use case: compositing. Produce ONE genuinely transparent ambient warm light overlay PNG for Home Assistant on exactly the supplied reference's full 1500x1049 canvas. Reference is positioning guide only: NO house, furniture, walls, background or text in output. The only visible content is a soft ivory/golden light wash for KITCHEN upper middle room. Shape follows polygon (680,262),(1029,87),(1151,222),(1050,346),(816,473),(684,359). Center (900,291). Soft warm 2800K, subtle translucent illumination fading at edges, no sharp outline. All other rooms and exterior entirely transparent. Never crop or center the patch: keep location on whole reference canvas. No fixtures, objects, icons, text or checkerboard pixels. Deliver a single full-canvas alpha light effect layer."
+}

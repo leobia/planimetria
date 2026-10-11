@@ -1,0 +1,1266 @@
+{
+  "version": 1,
+  "generated_by": "strumenti/genera_integrazione.py da strumenti/stanze.json",
+  "canvas": {
+    "width": 1500,
+    "height": 1049
+  },
+  "layers": [
+    "1 base giorno (immagine della card)",
+    "2 base notte (sopra la base giorno quando night_entity = on)",
+    "3 overlay luce, uno per stanza, a tutta tela, non cliccabili",
+    "4 icone di stato cliccabili sugli hotspot"
+  ],
+  "lighting": {
+    "method": "overlay RGBA a tutta tela, fusione normale; stanza accesa ricavata dall'illustrazione originale + alone caldo ~2800 K",
+    "opacity_giorno": 0.6,
+    "opacity_notte": 1.0,
+    "night_entity": "input_boolean.planimetria_notte",
+    "fallback": "unknown/unavailable: overlay nascosto (trasparente.png)"
+  },
+  "transparent": "www/floorplan/trasparente.png",
+  "floors": [
+    {
+      "id": "primo-piano",
+      "label": "Primo piano",
+      "source_illustration": "../illustrazione-nuova/01-primo-piano-v2.png",
+      "base": {
+        "giorno": "www/floorplan/primo-piano/base-giorno.png",
+        "notte": "www/floorplan/primo-piano/base-notte.png"
+      },
+      "base_url": {
+        "giorno": "/local/floorplan/primo-piano/base-giorno.png",
+        "notte": "/local/floorplan/primo-piano/base-notte.png"
+      },
+      "rooms": [
+        "salotto",
+        "ingresso",
+        "cucina",
+        "bagno_giu",
+        "studio_giu"
+      ]
+    },
+    {
+      "id": "mansarda",
+      "label": "Mansarda",
+      "source_illustration": "../illustrazione-nuova/02-mansarda-v2.png",
+      "base": {
+        "giorno": "www/floorplan/mansarda/base-giorno.png",
+        "notte": "www/floorplan/mansarda/base-notte.png"
+      },
+      "base_url": {
+        "giorno": "/local/floorplan/mansarda/base-giorno.png",
+        "notte": "/local/floorplan/mansarda/base-notte.png"
+      },
+      "rooms": [
+        "studio_su",
+        "pianerottolo",
+        "camera",
+        "bagno_su",
+        "ripostiglio"
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "salotto",
+      "label": "Salotto",
+      "floor": "primo-piano",
+      "icon": "mdi:sofa",
+      "overlay": "www/floorplan/primo-piano/luce-salotto.png",
+      "overlay_url": "/local/floorplan/primo-piano/luce-salotto.png",
+      "z_index": 10,
+      "polygon_px": [
+        [
+          40,
+          640
+        ],
+        [
+          440,
+          426
+        ],
+        [
+          452,
+          440
+        ],
+        [
+          642,
+          690
+        ],
+        [
+          232,
+          940
+        ],
+        [
+          200,
+          948
+        ],
+        [
+          40,
+          700
+        ]
+      ],
+      "polygon_pct": [
+        [
+          2.667,
+          61.01
+        ],
+        [
+          29.333,
+          40.61
+        ],
+        [
+          30.133,
+          41.945
+        ],
+        [
+          42.8,
+          65.777
+        ],
+        [
+          15.467,
+          89.609
+        ],
+        [
+          13.333,
+          90.372
+        ],
+        [
+          2.667,
+          66.73
+        ]
+      ],
+      "bbox_px": [
+        40,
+        426,
+        642,
+        948
+      ],
+      "hotspot_px": [
+        330,
+        700
+      ],
+      "hotspot_pct": [
+        22.0,
+        66.73
+      ],
+      "entity_demo": "input_boolean.planimetria_salotto",
+      "entity_light": "light.salotto",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "ingresso",
+      "label": "Ingresso e scala",
+      "floor": "primo-piano",
+      "icon": "mdi:stairs",
+      "overlay": "www/floorplan/primo-piano/luce-ingresso.png",
+      "overlay_url": "/local/floorplan/primo-piano/luce-ingresso.png",
+      "z_index": 11,
+      "polygon_px": [
+        [
+          440,
+          426
+        ],
+        [
+          482,
+          402
+        ],
+        [
+          480,
+          288
+        ],
+        [
+          530,
+          276
+        ],
+        [
+          640,
+          300
+        ],
+        [
+          690,
+          330
+        ],
+        [
+          700,
+          362
+        ],
+        [
+          795,
+          478
+        ],
+        [
+          1044,
+          350
+        ],
+        [
+          1044,
+          470
+        ],
+        [
+          1025,
+          486
+        ],
+        [
+          642,
+          690
+        ],
+        [
+          452,
+          440
+        ]
+      ],
+      "polygon_pct": [
+        [
+          29.333,
+          40.61
+        ],
+        [
+          32.133,
+          38.322
+        ],
+        [
+          32.0,
+          27.455
+        ],
+        [
+          35.333,
+          26.311
+        ],
+        [
+          42.667,
+          28.599
+        ],
+        [
+          46.0,
+          31.459
+        ],
+        [
+          46.667,
+          34.509
+        ],
+        [
+          53.0,
+          45.567
+        ],
+        [
+          69.6,
+          33.365
+        ],
+        [
+          69.6,
+          44.805
+        ],
+        [
+          68.333,
+          46.33
+        ],
+        [
+          42.8,
+          65.777
+        ],
+        [
+          30.133,
+          41.945
+        ]
+      ],
+      "bbox_px": [
+        440,
+        276,
+        1044,
+        690
+      ],
+      "hotspot_px": [
+        720,
+        545
+      ],
+      "hotspot_pct": [
+        48.0,
+        51.95
+      ],
+      "entity_demo": "input_boolean.planimetria_ingresso",
+      "entity_light": "light.ingresso",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "cucina",
+      "label": "Cucina",
+      "floor": "primo-piano",
+      "icon": "mdi:stove",
+      "overlay": "www/floorplan/primo-piano/luce-cucina.png",
+      "overlay_url": "/local/floorplan/primo-piano/luce-cucina.png",
+      "z_index": 12,
+      "polygon_px": [
+        [
+          666,
+          236
+        ],
+        [
+          980,
+          84
+        ],
+        [
+          1020,
+          98
+        ],
+        [
+          1030,
+          86
+        ],
+        [
+          1112,
+          138
+        ],
+        [
+          1120,
+          205
+        ],
+        [
+          1098,
+          216
+        ],
+        [
+          1046,
+          272
+        ],
+        [
+          1046,
+          348
+        ],
+        [
+          795,
+          478
+        ],
+        [
+          700,
+          362
+        ],
+        [
+          668,
+          320
+        ]
+      ],
+      "polygon_pct": [
+        [
+          44.4,
+          22.498
+        ],
+        [
+          65.333,
+          8.008
+        ],
+        [
+          68.0,
+          9.342
+        ],
+        [
+          68.667,
+          8.198
+        ],
+        [
+          74.133,
+          13.155
+        ],
+        [
+          74.667,
+          19.542
+        ],
+        [
+          73.2,
+          20.591
+        ],
+        [
+          69.733,
+          25.929
+        ],
+        [
+          69.733,
+          33.174
+        ],
+        [
+          53.0,
+          45.567
+        ],
+        [
+          46.667,
+          34.509
+        ],
+        [
+          44.533,
+          30.505
+        ]
+      ],
+      "bbox_px": [
+        666,
+        84,
+        1120,
+        478
+      ],
+      "hotspot_px": [
+        905,
+        300
+      ],
+      "hotspot_pct": [
+        60.33,
+        28.6
+      ],
+      "entity_demo": "input_boolean.planimetria_cucina",
+      "entity_light": "light.cucina",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "bagno_giu",
+      "label": "Bagno",
+      "floor": "primo-piano",
+      "icon": "mdi:shower",
+      "overlay": "www/floorplan/primo-piano/luce-bagno.png",
+      "overlay_url": "/local/floorplan/primo-piano/luce-bagno.png",
+      "z_index": 13,
+      "polygon_px": [
+        [
+          1046,
+          272
+        ],
+        [
+          1098,
+          216
+        ],
+        [
+          1173,
+          188
+        ],
+        [
+          1240,
+          230
+        ],
+        [
+          1260,
+          300
+        ],
+        [
+          1258,
+          322
+        ],
+        [
+          1108,
+          380
+        ],
+        [
+          1100,
+          345
+        ],
+        [
+          1046,
+          348
+        ]
+      ],
+      "polygon_pct": [
+        [
+          69.733,
+          25.929
+        ],
+        [
+          73.2,
+          20.591
+        ],
+        [
+          78.2,
+          17.922
+        ],
+        [
+          82.667,
+          21.926
+        ],
+        [
+          84.0,
+          28.599
+        ],
+        [
+          83.867,
+          30.696
+        ],
+        [
+          73.867,
+          36.225
+        ],
+        [
+          73.333,
+          32.888
+        ],
+        [
+          69.733,
+          33.174
+        ]
+      ],
+      "bbox_px": [
+        1046,
+        188,
+        1260,
+        380
+      ],
+      "hotspot_px": [
+        1165,
+        285
+      ],
+      "hotspot_pct": [
+        77.67,
+        27.17
+      ],
+      "entity_demo": "input_boolean.planimetria_bagno_giu",
+      "entity_light": "light.bagno_primo_piano",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "studio_giu",
+      "label": "Studio",
+      "floor": "primo-piano",
+      "icon": "mdi:desk",
+      "overlay": "www/floorplan/primo-piano/luce-studio.png",
+      "overlay_url": "/local/floorplan/primo-piano/luce-studio.png",
+      "z_index": 14,
+      "polygon_px": [
+        [
+          1044,
+          350
+        ],
+        [
+          1100,
+          345
+        ],
+        [
+          1108,
+          380
+        ],
+        [
+          1258,
+          322
+        ],
+        [
+          1298,
+          290
+        ],
+        [
+          1372,
+          336
+        ],
+        [
+          1374,
+          408
+        ],
+        [
+          1458,
+          488
+        ],
+        [
+          1208,
+          632
+        ],
+        [
+          1022,
+          482
+        ],
+        [
+          1044,
+          470
+        ]
+      ],
+      "polygon_pct": [
+        [
+          69.6,
+          33.365
+        ],
+        [
+          73.333,
+          32.888
+        ],
+        [
+          73.867,
+          36.225
+        ],
+        [
+          83.867,
+          30.696
+        ],
+        [
+          86.533,
+          27.645
+        ],
+        [
+          91.467,
+          32.031
+        ],
+        [
+          91.6,
+          38.894
+        ],
+        [
+          97.2,
+          46.52
+        ],
+        [
+          80.533,
+          60.248
+        ],
+        [
+          68.133,
+          45.949
+        ],
+        [
+          69.6,
+          44.805
+        ]
+      ],
+      "bbox_px": [
+        1022,
+        290,
+        1458,
+        632
+      ],
+      "hotspot_px": [
+        1235,
+        530
+      ],
+      "hotspot_pct": [
+        82.33,
+        50.52
+      ],
+      "entity_demo": "input_boolean.planimetria_studio_giu",
+      "entity_light": "light.studio_primo_piano",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "studio_su",
+      "label": "Studio",
+      "floor": "mansarda",
+      "icon": "mdi:desk",
+      "overlay": "www/floorplan/mansarda/luce-studio.png",
+      "overlay_url": "/local/floorplan/mansarda/luce-studio.png",
+      "z_index": 10,
+      "polygon_px": [
+        [
+          40,
+          585
+        ],
+        [
+          296,
+          446
+        ],
+        [
+          296,
+          412
+        ],
+        [
+          376,
+          360
+        ],
+        [
+          420,
+          380
+        ],
+        [
+          452,
+          412
+        ],
+        [
+          652,
+          638
+        ],
+        [
+          240,
+          925
+        ],
+        [
+          44,
+          715
+        ]
+      ],
+      "polygon_pct": [
+        [
+          2.667,
+          55.767
+        ],
+        [
+          19.733,
+          42.517
+        ],
+        [
+          19.733,
+          39.276
+        ],
+        [
+          25.067,
+          34.318
+        ],
+        [
+          28.0,
+          36.225
+        ],
+        [
+          30.133,
+          39.276
+        ],
+        [
+          43.467,
+          60.82
+        ],
+        [
+          16.0,
+          88.179
+        ],
+        [
+          2.933,
+          68.16
+        ]
+      ],
+      "bbox_px": [
+        40,
+        360,
+        652,
+        925
+      ],
+      "hotspot_px": [
+        330,
+        680
+      ],
+      "hotspot_pct": [
+        22.0,
+        64.82
+      ],
+      "entity_demo": "input_boolean.planimetria_studio_su",
+      "entity_light": "light.studio_mansarda",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "pianerottolo",
+      "label": "Pianerottolo",
+      "floor": "mansarda",
+      "icon": "mdi:stairs",
+      "overlay": "www/floorplan/mansarda/luce-pianerottolo.png",
+      "overlay_url": "/local/floorplan/mansarda/luce-pianerottolo.png",
+      "z_index": 11,
+      "polygon_px": [
+        [
+          420,
+          398
+        ],
+        [
+          665,
+          282
+        ],
+        [
+          690,
+          296
+        ],
+        [
+          694,
+          412
+        ],
+        [
+          750,
+          494
+        ],
+        [
+          806,
+          470
+        ],
+        [
+          818,
+          488
+        ],
+        [
+          882,
+          518
+        ],
+        [
+          902,
+          508
+        ],
+        [
+          652,
+          638
+        ],
+        [
+          452,
+          412
+        ]
+      ],
+      "polygon_pct": [
+        [
+          28.0,
+          37.941
+        ],
+        [
+          44.333,
+          26.883
+        ],
+        [
+          46.0,
+          28.217
+        ],
+        [
+          46.267,
+          39.276
+        ],
+        [
+          50.0,
+          47.092
+        ],
+        [
+          53.733,
+          44.805
+        ],
+        [
+          54.533,
+          46.52
+        ],
+        [
+          58.8,
+          49.38
+        ],
+        [
+          60.133,
+          48.427
+        ],
+        [
+          43.467,
+          60.82
+        ],
+        [
+          30.133,
+          39.276
+        ]
+      ],
+      "bbox_px": [
+        420,
+        282,
+        902,
+        638
+      ],
+      "hotspot_px": [
+        600,
+        500
+      ],
+      "hotspot_pct": [
+        40.0,
+        47.66
+      ],
+      "entity_demo": "input_boolean.planimetria_pianerottolo",
+      "entity_light": "light.pianerottolo",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "camera",
+      "label": "Camera",
+      "floor": "mansarda",
+      "icon": "mdi:bed",
+      "overlay": "www/floorplan/mansarda/luce-camera.png",
+      "overlay_url": "/local/floorplan/mansarda/luce-camera.png",
+      "z_index": 12,
+      "polygon_px": [
+        [
+          665,
+          282
+        ],
+        [
+          986,
+          86
+        ],
+        [
+          1215,
+          272
+        ],
+        [
+          1240,
+          290
+        ],
+        [
+          1200,
+          322
+        ],
+        [
+          1140,
+          287
+        ],
+        [
+          1120,
+          274
+        ],
+        [
+          1048,
+          276
+        ],
+        [
+          1046,
+          360
+        ],
+        [
+          1050,
+          402
+        ],
+        [
+          1000,
+          432
+        ],
+        [
+          902,
+          508
+        ],
+        [
+          882,
+          518
+        ],
+        [
+          818,
+          488
+        ],
+        [
+          806,
+          470
+        ],
+        [
+          750,
+          494
+        ],
+        [
+          694,
+          412
+        ],
+        [
+          690,
+          296
+        ]
+      ],
+      "polygon_pct": [
+        [
+          44.333,
+          26.883
+        ],
+        [
+          65.733,
+          8.198
+        ],
+        [
+          81.0,
+          25.929
+        ],
+        [
+          82.667,
+          27.645
+        ],
+        [
+          80.0,
+          30.696
+        ],
+        [
+          76.0,
+          27.359
+        ],
+        [
+          74.667,
+          26.12
+        ],
+        [
+          69.867,
+          26.311
+        ],
+        [
+          69.733,
+          34.318
+        ],
+        [
+          70.0,
+          38.322
+        ],
+        [
+          66.667,
+          41.182
+        ],
+        [
+          60.133,
+          48.427
+        ],
+        [
+          58.8,
+          49.38
+        ],
+        [
+          54.533,
+          46.52
+        ],
+        [
+          53.733,
+          44.805
+        ],
+        [
+          50.0,
+          47.092
+        ],
+        [
+          46.267,
+          39.276
+        ],
+        [
+          46.0,
+          28.217
+        ]
+      ],
+      "bbox_px": [
+        665,
+        86,
+        1240,
+        518
+      ],
+      "hotspot_px": [
+        930,
+        320
+      ],
+      "hotspot_pct": [
+        62.0,
+        30.51
+      ],
+      "entity_demo": "input_boolean.planimetria_camera",
+      "entity_light": "light.camera",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "bagno_su",
+      "label": "Bagno",
+      "floor": "mansarda",
+      "icon": "mdi:shower",
+      "overlay": "www/floorplan/mansarda/luce-bagno.png",
+      "overlay_url": "/local/floorplan/mansarda/luce-bagno.png",
+      "z_index": 13,
+      "polygon_px": [
+        [
+          1046,
+          360
+        ],
+        [
+          1048,
+          276
+        ],
+        [
+          1120,
+          274
+        ],
+        [
+          1140,
+          287
+        ],
+        [
+          1308,
+          404
+        ],
+        [
+          1308,
+          412
+        ],
+        [
+          1197,
+          488
+        ]
+      ],
+      "polygon_pct": [
+        [
+          69.733,
+          34.318
+        ],
+        [
+          69.867,
+          26.311
+        ],
+        [
+          74.667,
+          26.12
+        ],
+        [
+          76.0,
+          27.359
+        ],
+        [
+          87.2,
+          38.513
+        ],
+        [
+          87.2,
+          39.276
+        ],
+        [
+          79.8,
+          46.52
+        ]
+      ],
+      "bbox_px": [
+        1046,
+        274,
+        1308,
+        488
+      ],
+      "hotspot_px": [
+        1185,
+        420
+      ],
+      "hotspot_pct": [
+        79.0,
+        40.04
+      ],
+      "entity_demo": "input_boolean.planimetria_bagno_su",
+      "entity_light": "light.bagno_mansarda",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    },
+    {
+      "id": "ripostiglio",
+      "label": "Ripostiglio",
+      "floor": "mansarda",
+      "icon": "mdi:archive",
+      "overlay": "www/floorplan/mansarda/luce-ripostiglio.png",
+      "overlay_url": "/local/floorplan/mansarda/luce-ripostiglio.png",
+      "z_index": 14,
+      "polygon_px": [
+        [
+          1200,
+          322
+        ],
+        [
+          1248,
+          295
+        ],
+        [
+          1248,
+          250
+        ],
+        [
+          1272,
+          238
+        ],
+        [
+          1402,
+          345
+        ],
+        [
+          1430,
+          412
+        ],
+        [
+          1308,
+          480
+        ],
+        [
+          1308,
+          414
+        ]
+      ],
+      "polygon_pct": [
+        [
+          80.0,
+          30.696
+        ],
+        [
+          83.2,
+          28.122
+        ],
+        [
+          83.2,
+          23.832
+        ],
+        [
+          84.8,
+          22.688
+        ],
+        [
+          93.467,
+          32.888
+        ],
+        [
+          95.333,
+          39.276
+        ],
+        [
+          87.2,
+          45.758
+        ],
+        [
+          87.2,
+          39.466
+        ]
+      ],
+      "bbox_px": [
+        1200,
+        238,
+        1430,
+        480
+      ],
+      "hotspot_px": [
+        1350,
+        385
+      ],
+      "hotspot_pct": [
+        90.0,
+        36.7
+      ],
+      "entity_demo": "input_boolean.planimetria_ripostiglio",
+      "entity_light": "light.ripostiglio",
+      "states": {
+        "on": "overlay visibile",
+        "off": "trasparente",
+        "unknown/unavailable": "trasparente (icona di stato segnala il problema)"
+      },
+      "tap_action": "toggle",
+      "hold_action": "more-info"
+    }
+  ]
+}

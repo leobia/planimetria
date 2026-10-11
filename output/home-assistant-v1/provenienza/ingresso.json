@@ -1,0 +1,6 @@
+{
+  "tool": "image_gen built-in",
+  "source": "C:\\Users\\leona\\.codex\\generated_images\\01a129bc-c57f-7360-a0f7-6badcfcc7d4a\\exec-915b1198-a05f-4a4f-911b-61183b114151.png",
+  "destination": "primo-piano/luce-ingresso.png",
+  "prompt": "Use case: compositing. Produce ONE genuinely transparent ambient warm light overlay PNG for Home Assistant on exactly the supplied reference's full 1500x1049 canvas. Reference is positioning guide only: NO house, furniture, walls, background or text in output. The only visible content is a soft ivory/golden light wash for ENTRANCE/CORRIDOR/STAIRS central room. Shape follows polygon (433,443),(679,302),(811,405),(995,477),(641,688), with extension over stairs at (500,280),(647,313),(695,417). Center (696,504). Soft warm 2800K, subtle translucent illumination, fading edges, no sharp outline. All other rooms and exterior entirely transparent. Never crop or center the patch: keep location on whole reference canvas. No fixtures, objects, icons, text or checkerboard pixels. Deliver a single full-canvas alpha light effect layer."
+}
